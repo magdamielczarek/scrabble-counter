@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:600|Roboto&display=swap);
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html, body {
+  background-color: #fff;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%; }
+
+body * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+html {
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%; }
+
+.wrapper {
+  display: grid; }
+
+
+/*# sourceMappingURL=styles.css.map*/
