@@ -2,4 +2,129 @@
 
 .wrapper {
   display: grid;
+  grid-template-areas: "header header" "board scores" "footer footer";
+  grid-template-columns: minmax(70%,80%) minmax(20%,30%);
+  grid-template-rows: 15% auto 5%;
+  height: 100%;
+}
+
+.form-group {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  position: relative;
+  input {
+    border: 2px solid $light-green;
+    border-radius: 5px;
+    margin: 0 1rem;
+    padding: 1rem;
+    position: relative;
+    &::before {
+      border-radius: inherit;
+      background: red;
+      content: '';
+      position: absolute;
+      height: 1rem;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+.board {
+  background-color: $light-green;
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 1.5rem;
+  grid-area: board;
+  justify-content: space-between;
+  position: relative;
+  &__panel {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    .player-name {
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+  }
+  &__word {
+    flex: 7;
+    padding: 3rem;
+  }
+  &__summary {
+    align-items: center;
+    border-top: 2px solid $white;
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    &__score {
+      span {
+        color: $dark-green;
+        font-weight: bold;
+        text-shadow: 2px -2px 2px rgba(#222,.5);
+        font-size: 4rem;
+      }
+    }
+  }
+}
+
+.word-bonus {
+  margin-left: 2rem;
+}
+
+.bonus {
+  display: inline-block;
+  &__button {
+    border: 1px solid $white;
+    border-radius: 5px;
+    color: $dark-green;
+    cursor: pointer;
+    font-size: 1.3rem;
+    outline: none;
+    padding: .5rem;
+    transition: transform .5s;
+    &--x2 {
+      background-color: $light-blue;
+    }
+    &--x3 {
+      background-color: $orange;
+    }
+    &--x3word {
+      color: $white;
+      background-color: $red;
+    }
+    &--x2word {
+      color: $neutral-beige;
+      background-color: $dark-blue;
+    }
+    &:hover {
+      transform: rotate(20deg);
+    }
+  }
+}
+
+.scores {
+  background-color: $neutral-beige;
+  border-left: 2px solid $white;
+  font-size: 1.2rem;
+  grid-area: scores;
+  padding: 1rem;
+  .players {
+    width: 100%;
+    th,td {
+      text-align: center;
+    }
+    tfoot {
+      background-color: #005A35;
+      color: $white;
+    }
+  }
 }

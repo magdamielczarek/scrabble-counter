@@ -9,30 +9,131 @@
 <link href="../../styles.css" rel="stylesheet"></head>
 <body>
     <div class="wrapper">
-        <hader>
-            <button>Nowa gra</button>
-            <div>
-                <form>
-                    <label for="player">Imię gracza:</label>
-                    <input id="player" type="text"/>
-                    <button>dodaj</button>
-                </form>
-            </div>
+        <hader class="header">
+            <h1>
+                <span class="word">
+                    <span class="letter">l</span>
+                    <span class="letter">i</span>
+                    <span class="letter">c</span>
+                    <span class="letter">z</span>
+                    <span class="letter">n</span>
+                    <span class="letter">i</span>
+                    <span class="letter">k</span>
+                </span>
+                <span class="word">
+                    <span class="letter">s</span>
+                    <span class="letter">c</span>
+                    <span class="letter">r</span>
+                    <span class="letter">a</span>
+                    <span class="letter">b</span>
+                    <span class="letter">b</span>
+                    <span class="letter">l</span>
+                    <span class="letter">e</span>
+                </span>
+            </h1>
+            <button class="button button--strong">Nowa gra</button>
         </hader>
         <main class="board">
-            <form>
-                <label for="word">wpisz słowo:</label>
-                <input id="word" type="text" />
+            <section class="board__panel">
+                <div>Gracz: <strong class="player-name">Stasiek</strong></div>
+                <button class="button">PASS / WYMIEŃ LITERY</button>
+                <form>
+                    <div class="form-group">
+                        <input id="word" type="text" placeholder="wpisz słowo" />
+                        <button class="button button--strong">dodaj</button>
+                    </div>
+                </form>
+            </section>
+            <section class="board__word">
                 <div class="letters-container">
-                    MIEJSCE NA SŁOWO
+                    <div class="letter-group">
+                        <span class="letter">l</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="letter-group">
+                        <span class="letter">a</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="letter-group">
+                        <span class="letter">t</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="letter-group">
+                        <span class="letter">o</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="word-bonus">
+                        <button class="bonus__button bonus__button--x2word">x3</button>
+                        <button class="bonus__button bonus__button--x3word">x4</button>
+                    </div>
                 </div>
-                <div class="summary">Ilośc punktów:</div>
-            </form>
+                <div class="letters-container">
+                    <div class="letter-group">
+                        <span class="letter">m</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="letter-group">
+                        <span class="letter">a</span>
+                        <div class="bonus">
+                            <button class="bonus__button bonus__button--x2">x2</button>
+                            <button class="bonus__button bonus__button--x3">x3</button>
+                        </div>
+                    </div>
+                    <div class="word-bonus">
+                        <button class="bonus__button bonus__button--x2word">x3</button>
+                        <button class="bonus__button bonus__button--x3word">x4</button>
+                    </div>
+                </div>
+            </section>
+            <section class="board__summary">
+                <div class="board__summary__score">punkty: <span>23</span></div>
+                <button class="button button--strong">sumuj</button>
+            </section>
         </main>
-        <aside class="counting">
-            punkty
+        <aside class="scores">
+            <form class="add-players">
+                <div class="form-group">
+                    <input id="player" type="text" placeholder="imię gracza"/>
+                    <button class="button">dodaj</button>
+                </div>
+            </form>
+            <table class="players">
+                <thead>
+                    <tr>
+                        <th>Stasiek</th>
+                        <th>Magda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>21</td>
+                        <td>20</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>234</td>
+                        <td>230</td>
+                    </tr>
+                </tfoot>
+            </table>
         </aside>
-        <footer>
+        <footer class="footer">
             <span>&copy; Magda Mielczarek 2019</span>
             <span>social media</span>
         </footer>
