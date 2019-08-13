@@ -18,10 +18,17 @@
   height: 6rem;
   line-height: 6rem;
   margin: 0 1rem 1.5rem 0;
+  position: relative;
   text-align: center;
   text-shadow: 0 -1px 1px #000;
   text-transform: uppercase;
   width: 6rem;
+  &__score {
+    font-size: 1.2rem;
+    position: absolute;
+    right: 8%;
+    bottom: -30%;
+  }
 }
 
 .letter-group {

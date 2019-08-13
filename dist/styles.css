@@ -41,6 +41,9 @@ html {
     transform: scale(1.1); }
   .button--strong {
     background-color: #D60230; }
+  .button:disabled {
+    background-color: #222222;
+    opacity: .5; }
 
 .letter {
   background-color: #E2DAC0;
@@ -54,10 +57,16 @@ html {
   height: 6rem;
   line-height: 6rem;
   margin: 0 1rem 1.5rem 0;
+  position: relative;
   text-align: center;
   text-shadow: 0 -1px 1px #000;
   text-transform: uppercase;
   width: 6rem; }
+  .letter__score {
+    font-size: 1.2rem;
+    position: absolute;
+    right: 8%;
+    bottom: -30%; }
 
 .letter-group {
   align-items: flex-end;
@@ -92,7 +101,7 @@ html {
 .wrapper {
   display: grid;
   grid-template-areas: "header header" "board scores" "footer footer";
-  grid-template-columns: minmax(70%, 80%) minmax(20%, 30%);
+  grid-template-columns: minmax(60%, 80%) minmax(20%, 40%);
   grid-template-rows: 15% auto 5%;
   height: 100%; }
 
@@ -105,18 +114,10 @@ html {
   .form-group input {
     border: 2px solid #76AB24;
     border-radius: 5px;
-    margin: 0 1rem;
+    margin: 0 1rem 0 0;
     padding: 1rem;
-    position: relative; }
-    .form-group input::before {
-      border-radius: inherit;
-      background: red;
-      content: '';
-      position: absolute;
-      height: 1rem;
-      bottom: 0;
-      left: 0;
-      width: 100%; }
+    position: relative;
+    width: 65%; }
 
 .board {
   background-color: #76AB24;
@@ -141,6 +142,7 @@ html {
     padding: 3rem; }
   .board__summary {
     align-items: center;
+    background-color: #323232;
     border-top: 2px solid #fff;
     display: flex;
     flex-flow: row nowrap;
@@ -175,8 +177,12 @@ html {
       color: #fff;
       background-color: #D60230; }
     .bonus__button--x2word {
-      color: #E2DAC0;
+      color: #fff;
       background-color: #0691D2; }
+    .bonus__button--scrabble {
+      color: #fff;
+      background-color: #005A35;
+      text-transform: uppercase; }
     .bonus__button:hover {
       transform: rotate(20deg); }
 
@@ -185,8 +191,18 @@ html {
   border-left: 2px solid #fff;
   font-size: 1.2rem;
   grid-area: scores;
+  overflow: hidden;
   padding: 1rem; }
+  .scores .add-players {
+    display: none;
+    margin-bottom: 2rem;
+    transform: translateY(-200%);
+    transition: transform 1s; }
+    .scores .add-players--showed {
+      display: block;
+      transform: rotateY(0); }
   .scores .players {
+    font-size: 1.3rem;
     width: 100%; }
     .scores .players th, .scores .players td {
       text-align: center; }

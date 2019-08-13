@@ -20,4 +20,8 @@
   &--strong {
     background-color: $red;
   }
+  &:disabled {
+    background-color: #222222;
+    opacity: .5;
+  }
 }

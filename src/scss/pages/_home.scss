@@ -3,7 +3,7 @@
 .wrapper {
   display: grid;
   grid-template-areas: "header header" "board scores" "footer footer";
-  grid-template-columns: minmax(70%,80%) minmax(20%,30%);
+  grid-template-columns: minmax(60%,80%) minmax(20%,40%);
   grid-template-rows: 15% auto 5%;
   height: 100%;
 }
@@ -17,19 +17,10 @@
   input {
     border: 2px solid $light-green;
     border-radius: 5px;
-    margin: 0 1rem;
+    margin: 0 1rem 0 0;
     padding: 1rem;
     position: relative;
-    &::before {
-      border-radius: inherit;
-      background: red;
-      content: '';
-      position: absolute;
-      height: 1rem;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-    }
+    width: 65%;
   }
 }
 
@@ -59,6 +50,7 @@
   }
   &__summary {
     align-items: center;
+    background-color: #323232;
     border-top: 2px solid $white;
     display: flex;
     flex-flow: row nowrap;
@@ -102,8 +94,13 @@
       background-color: $red;
     }
     &--x2word {
-      color: $neutral-beige;
+      color: $white;
       background-color: $dark-blue;
+    }
+    &--scrabble {
+      color: $white;
+      background-color: $dark-green;
+      text-transform: uppercase;
     }
     &:hover {
       transform: rotate(20deg);
@@ -116,8 +113,20 @@
   border-left: 2px solid $white;
   font-size: 1.2rem;
   grid-area: scores;
+  overflow: hidden;
   padding: 1rem;
+  .add-players {
+    display: none;
+    margin-bottom: 2rem;
+    transform: translateY(-200%);
+    transition: transform 1s;
+    &--showed {
+      display: block;
+      transform: rotateY(0);
+    }
+  }
   .players {
+    font-size: 1.3rem;
     width: 100%;
     th,td {
       text-align: center;
