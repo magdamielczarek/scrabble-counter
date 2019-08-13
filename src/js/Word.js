@@ -112,7 +112,13 @@ export default class Word {
         return this.letters;
     }
 
-    getSum(){
+    getSum() {
+        return this.letters.reduce((acc,curr) => {
+            if(curr.bonus.length){
 
+            }
+            return acc + curr.bonus ? curr.points : curr.points;
+        },0);
     }
+
 }

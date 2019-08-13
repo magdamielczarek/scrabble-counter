@@ -142,7 +142,8 @@ function () {
   }]);
 
   return Letter;
-}();
+}(); //Math.random().toString(36).substr(2, 16)
+
 
 
 
@@ -160,11 +161,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Player; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Player = function Player(name, score) {
+var Player = function Player(id, name) {
+  var score = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var isActive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
   _classCallCheck(this, Player);
 
+  this.id = id;
   this.name = name;
   this.score = score;
+  this.isActive = isActive;
 };
 
 
@@ -319,7 +325,13 @@ function () {
     }
   }, {
     key: "getSum",
-    value: function getSum() {}
+    value: function getSum() {
+      return this.letters.reduce(function (acc, curr) {
+        if (curr.bonus.length) {}
+
+        return acc + curr.bonus ? curr.points : curr.points;
+      }, 0);
+    }
   }]);
 
   return Word;
@@ -363,6 +375,14 @@ window.addEventListener('load', function () {
   var addPlayerForm = document.querySelector('#addPlayer');
   var startGameBtn = document.querySelector('#startGame');
   var savePlayers = document.querySelector('#savePlayers');
+  var passButton = document.querySelector('#pass');
+  var sumButton = document.querySelector('#addSum');
+  passButton.addEventListener('click', function () {
+    return board.switchTurn();
+  });
+  sumButton.addEventListener('click', function () {
+    board.switchTurn();
+  });
   addWordForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -384,13 +404,16 @@ window.addEventListener('load', function () {
 
     if (playersNumber >= 3) {
       addPlayerForm.classList.toggle('add-players--showed');
+      board.initializeGame();
     }
   });
   savePlayers.addEventListener('click', function (event) {
     addPlayerForm.classList.toggle('add-players--showed');
+    board.initializeGame();
   });
   startGameBtn.addEventListener('click', function (event) {
     event.preventDefault();
+    savePlayers.setAttribute('disabled', 'disabled');
     board.clearBoard();
     document.querySelector('.players').innerHTML = "\n                <thead>\n                    <tr></tr>\n                </thead>\n                <tbody></tbody>\n                <tfoot>\n                    <tr></tr>\n                </tfoot>\n            ";
     addPlayerForm.classList.toggle('add-players--showed');
@@ -411,12 +434,13 @@ function () {
     this.activePlayer = activePlayer;
     this.words = words;
     this.gameStatus = false;
+    this.points = 0;
   }
 
   _createClass(GameBoard, [{
     key: "addPlayer",
     value: function addPlayer(name) {
-      var player = new _Player__WEBPACK_IMPORTED_MODULE_4__["default"](name || this.players.length + 1, 0);
+      var player = new _Player__WEBPACK_IMPORTED_MODULE_4__["default"](this.players.length, name || this.players.length + 1, 0);
       var playerElement = document.createElement('th');
       playerElement.textContent = "".concat(player.name);
       this.players.push(player);
@@ -430,7 +454,8 @@ function () {
   }, {
     key: "clearBoard",
     value: function clearBoard() {
-      this.players = [];
+      this.players = []; // wyczysc tablice slow
+      // usun slowa z planszy
     }
   }, {
     key: "addWord",
@@ -449,15 +474,32 @@ function () {
         wordElement.insertAdjacentElement('beforeend', letterGroup);
       });
       wordElement.innerHTML += "<div class=\"word-bonus\">\n                <button class=\"bonus__button bonus__button--x2word\">x3</button>\n                <button class=\"bonus__button bonus__button--x3word\">x4</button>\n                <button class=\"bonus__button bonus__button--scrabble\">scrabble</button>\n            </div>";
+      console.log(word.getSum());
     }
   }, {
     key: "removeWord",
     value: function removeWord(id) {}
   }, {
     key: "switchTurn",
-    value: function switchTurn(activePlayer) {
-      this.activePlayer++;
-      console.log(this.activePlayer);
+    value: function switchTurn() {
+      if (this.activePlayer === this.getPlayers().length - 1) {
+        this.activePlayer = 0;
+      } else {
+        this.activePlayer = this.activePlayer + 1;
+      }
+
+      document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
+    }
+  }, {
+    key: "initializeGame",
+    value: function initializeGame() {
+      this.activePlayer = this.players[0].id;
+      document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
+    }
+  }, {
+    key: "pass",
+    value: function pass() {
+      this.switchTurn();
     }
   }]);
 

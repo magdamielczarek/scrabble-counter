@@ -14,3 +14,5 @@ export default class Letter {
     }
 }
 
+//Math.random().toString(36).substr(2, 16)
+

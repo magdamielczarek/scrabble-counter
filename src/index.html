@@ -35,8 +35,8 @@
         </hader>
         <main class="board">
             <section class="board__panel">
-                <div>Gracz: <strong class="player-name">Stasiek</strong></div>
-                <button class="button" type="button">PASS / WYMIEŃ LITERY</button>
+                <strong class="player-name"></strong>
+                <button id="pass" class="button" type="button">PASS / WYMIEŃ LITERY</button>
                 <form id="addWord">
                     <div class="form-group">
                         <input id="word" type="text" placeholder="wpisz słowo" name="word"/>
@@ -46,8 +46,8 @@
             </section>
             <section class="board__word"></section>
             <section class="board__summary">
-                <div class="board__summary__score">punkty: <span>23</span></div>
-                <button class="button button--strong" type="button">sumuj</button>
+                <div class="board__summary__score">punkty: <span>0</span></div>
+                <button id="addSum" class="button button--strong" type="button">sumuj</button>
             </section>
         </main>
         <aside class="scores">
@@ -69,8 +69,15 @@
             </table>
         </aside>
         <footer class="footer">
-            <span>&copy; Magda Mielczarek 2019</span>
-            <span>social media</span>
+            <span class="footer__copyright">&copy; Magda Mielczarek 2019</span>
+            <div class="footer__icons">
+                <div class="footer__icons__icon">
+                    <a href="https://www.linkedin.com/in/magda-mielczarek-20b06275/" target="_blank"><img src="assets/svg/linkedin-logo.svg" /></a>
+                </div>
+                <div class="footer__icons__icon">
+                    <a href="https://github.com/magdamielczarek" target="_blank"><img src="assets/svg/github-sign.svg" /></a>
+                </div>
+            </div>
         </footer>
     </div>
 </body>

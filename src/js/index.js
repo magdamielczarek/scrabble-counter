@@ -14,6 +14,14 @@ window.addEventListener('load',
         const addPlayerForm = document.querySelector('#addPlayer');
         const startGameBtn = document.querySelector('#startGame');
         const savePlayers = document.querySelector('#savePlayers');
+        const passButton = document.querySelector('#pass');
+        const sumButton = document.querySelector('#addSum');
+
+        passButton.addEventListener('click', () => board.switchTurn());
+
+        sumButton.addEventListener('click', () => {
+            board.switchTurn();
+        });
 
         addWordForm.addEventListener('submit',function(event){
             event.preventDefault();
@@ -34,15 +42,18 @@ window.addEventListener('load',
             }
             if(playersNumber >= 3){
                 addPlayerForm.classList.toggle('add-players--showed');
+                board.initializeGame();
             }
         });
 
         savePlayers.addEventListener('click',(event) => {
             addPlayerForm.classList.toggle('add-players--showed');
+            board.initializeGame();
         });
 
         startGameBtn.addEventListener('click',(event) => {
             event.preventDefault();
+            savePlayers.setAttribute('disabled','disabled');
             board.clearBoard();
             document.querySelector('.players').innerHTML = `
                 <thead>
@@ -64,10 +75,11 @@ class GameBoard {
         this.activePlayer = activePlayer;
         this.words = words;
         this.gameStatus = false;
+        this.points = 0;
     }
 
     addPlayer(name){
-        const player = new Player(name || this.players.length + 1, 0);
+        const player = new Player(this.players.length,name || this.players.length + 1, 0);
         const playerElement = document.createElement('th');
         playerElement.textContent = `${player.name}`;
         this.players.push(player);
@@ -80,6 +92,8 @@ class GameBoard {
 
     clearBoard(){
         this.players = [];
+        // wyczysc tablice slow
+        // usun slowa z planszy
     }
 
     addWord(value){
@@ -108,14 +122,28 @@ class GameBoard {
                 <button class="bonus__button bonus__button--x3word">x4</button>
                 <button class="bonus__button bonus__button--scrabble">scrabble</button>
             </div>`;
+        console.log(word.getSum());
     }
 
     removeWord(id){
 
     }
 
-    switchTurn(activePlayer){
-        this.activePlayer++;
-        console.log(this.activePlayer);
+    switchTurn(){
+        if(this.activePlayer === this.getPlayers().length - 1){
+            this.activePlayer = 0;
+        } else {
+            this.activePlayer = this.activePlayer + 1;
+        }
+        document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
+    }
+
+    initializeGame(){
+        this.activePlayer = this.players[0].id;
+        document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
+    }
+
+    pass(){
+        this.switchTurn();
     }
 }
