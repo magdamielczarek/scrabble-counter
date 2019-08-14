@@ -116,93 +116,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Letter =
-/*#__PURE__*/
-function () {
-  function Letter(_char, points) {
-    var bonus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-    _classCallCheck(this, Letter);
-
-    this["char"] = _char;
-    this.points = points;
-    this.bonus = bonus;
-  }
-
-  _createClass(Letter, [{
-    key: "setBonus",
-    value: function setBonus(bonus) {
-      this.bonus = bonus;
-    }
-  }, {
-    key: "getBonus",
-    value: function getBonus(bonus) {
-      return this.bonus;
-    }
-  }]);
-
-  return Letter;
-}(); //Math.random().toString(36).substr(2, 16)
-
-
-
-
-/***/ }),
-
-/***/ "./src/js/Player.js":
-/*!**************************!*\
-  !*** ./src/js/Player.js ***!
-  \**************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Player; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Player = function Player(id, name) {
-  var score = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var isActive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-  _classCallCheck(this, Player);
-
-  this.id = id;
-  this.name = name;
-  this.score = score;
-  this.isActive = isActive;
-};
-
-
-
-/***/ }),
-
-/***/ "./src/js/Word.js":
-/*!************************!*\
-  !*** ./src/js/Word.js ***!
-  \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Word; });
-/* harmony import */ var _Letter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Letter */ "./src/js/Letter.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
 var punctation = [{
   "char": "a",
   value: 1
@@ -298,23 +211,158 @@ var punctation = [{
   value: 5
 }];
 
+var Letter =
+/*#__PURE__*/
+function () {
+  function Letter(_char, points) {
+    var _this = this;
+
+    var bonus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var bonus2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var bonus3 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+
+    _classCallCheck(this, Letter);
+
+    this.id = Math.random().toString(36).substr(2, 16);
+    this["char"] = _char;
+    this.points = punctation.filter(function (punct) {
+      return punct["char"] === _this["char"];
+    })[0].value;
+    this.bonus = bonus;
+    this.bonus2 = bonus2;
+    this.bonus3 = bonus3;
+  }
+
+  _createClass(Letter, [{
+    key: "setBonus",
+    value: function setBonus(bonus) {
+      this.bonus = bonus;
+    }
+  }, {
+    key: "setBonus2",
+    value: function setBonus2(bonus2value) {
+      this.bonus2 = bonus2value;
+    }
+  }, {
+    key: "setBonus3",
+    value: function setBonus3(bonus3value) {
+      this.bonus3 = bonus3value;
+    }
+  }, {
+    key: "updatePoints",
+    value: function updatePoints(bonus, state) {
+      var _this2 = this;
+
+      if (bonus === 'x2') {
+        this.bonus2 = state;
+        this.bonus3 = false;
+      } else if (bonus === 'x3') {
+        this.bonus2 = false;
+        this.bonus3 = state;
+      }
+
+      if (this.bonus2) {
+        this.points *= 2;
+      } else if (this.bonus3) {
+        this.points *= 3;
+      } else if (!this.bonus2 && !this.bonus3) {
+        this.points = punctation.filter(function (punct) {
+          return punct["char"] === _this2["char"];
+        })[0].value;
+      }
+
+      console.log(this.points);
+    }
+  }, {
+    key: "getBonus",
+    value: function getBonus(bonus) {
+      return this.bonus;
+    }
+  }]);
+
+  return Letter;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/Player.js":
+/*!**************************!*\
+  !*** ./src/js/Player.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Player; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Player = function Player(id, name) {
+  var score = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var isActive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  _classCallCheck(this, Player);
+
+  this.id = id;
+  this.name = name;
+  this.score = score;
+  this.isActive = isActive;
+};
+
+
+
+/***/ }),
+
+/***/ "./src/js/Word.js":
+/*!************************!*\
+  !*** ./src/js/Word.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Word; });
+/* harmony import */ var _Letter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Letter */ "./src/js/Letter.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
 var Word =
 /*#__PURE__*/
 function () {
   function Word(value) {
     var letters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var bonuses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var sum = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var bonus2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var bonus3 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+    var bonusScrabble = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+    var sum = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
 
     _classCallCheck(this, Word);
 
+    this.id = Math.random().toString(36).substr(2, 16);
     this.value = value;
     this.letters = _toConsumableArray(value).map(function (letter) {
-      return new _Letter__WEBPACK_IMPORTED_MODULE_0__["default"](letter, punctation.filter(function (punct) {
-        return punct["char"] === letter;
-      })[0].value);
+      return new _Letter__WEBPACK_IMPORTED_MODULE_0__["default"](letter);
     });
-    this.bonuses = bonuses;
+    this.bonus2 = bonus2;
+    this.bonus3 = bonus3;
+    this.bonusScrabble = bonusScrabble;
     this.sum = sum;
   }
 
@@ -327,9 +375,7 @@ function () {
     key: "getSum",
     value: function getSum() {
       return this.letters.reduce(function (acc, curr) {
-        if (curr.bonus.length) {}
-
-        return acc + curr.bonus ? curr.points : curr.points;
+        return acc + curr.points;
       }, 0);
     }
   }]);
@@ -370,13 +416,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 window.addEventListener('load', function () {
-  var board = new GameBoard();
-  var addWordForm = document.querySelector('#addWord');
-  var addPlayerForm = document.querySelector('#addPlayer');
-  var startGameBtn = document.querySelector('#startGame');
-  var savePlayers = document.querySelector('#savePlayers');
-  var passButton = document.querySelector('#pass');
-  var sumButton = document.querySelector('#addSum');
+  var board = new GameBoard(),
+      addWordForm = document.querySelector('#addWord'),
+      addPlayerForm = document.querySelector('#addPlayer'),
+      startGameBtn = document.querySelector('#startGame'),
+      savePlayers = document.querySelector('#savePlayers'),
+      passButton = document.querySelector('#pass'),
+      sumButton = document.querySelector('#addSum');
   passButton.addEventListener('click', function () {
     return board.switchTurn();
   });
@@ -433,7 +479,6 @@ function () {
     this.players = players;
     this.activePlayer = activePlayer;
     this.words = words;
-    this.gameStatus = false;
     this.points = 0;
   }
 
@@ -454,8 +499,10 @@ function () {
   }, {
     key: "clearBoard",
     value: function clearBoard() {
-      this.players = []; // wyczysc tablice slow
-      // usun slowa z planszy
+      this.players = [];
+      this.words = [];
+      this.points = 0;
+      this.activePlayer = undefined;
     }
   }, {
     key: "addWord",
@@ -467,13 +514,31 @@ function () {
       document.querySelector('.board__word').insertAdjacentElement('beforeend', wordElement);
       this.words.push(word);
       word.getLetters().map(function (letter) {
-        var template = "\n                    <span class=\"letter\">".concat(letter["char"], "<span class=\"letter__score\">").concat(letter.points, "</span></span>\n                    <div class=\"bonus\">\n                        <button class=\"bonus__button bonus__button--x2\">x2</button>\n                        <button class=\"bonus__button bonus__button--x3\">x3</button>\n                    </div>\n            ");
+        var template = "\n                    <span class=\"letter\">".concat(letter["char"], "<span class=\"letter__score\">").concat(letter.points, "</span></span>\n                    <div class=\"bonus\">\n                        <div class=\"bonus__container\">\n                            <input id=").concat(letter.id, "x2 name=").concat(letter.id, " data-letter-bonus=\"x2\" data-letter-id=").concat(letter.id, " type=\"checkbox\">\n                            <label for=").concat(letter.id, "x2 class=\"bonus__button bonus__button--x2\">x2</label>\n                        </div>\n                        <div class=\"bonus__container\">\n                            <input id=").concat(letter.id, "x3 name=").concat(letter.id, " data-letter-bonus=\"x3\" data-letter-id=").concat(letter.id, " type=\"checkbox\">\n                            <label for=").concat(letter.id, "x3 class=\"bonus__button bonus__button--x3\">x3</label>\n                        </div>\n                    </div>\n            ");
         var letterGroup = document.createElement('div');
         letterGroup.classList.add('letter-group');
         letterGroup.innerHTML = template;
         wordElement.insertAdjacentElement('beforeend', letterGroup);
       });
-      wordElement.innerHTML += "<div class=\"word-bonus\">\n                <button class=\"bonus__button bonus__button--x2word\">x3</button>\n                <button class=\"bonus__button bonus__button--x3word\">x4</button>\n                <button class=\"bonus__button bonus__button--scrabble\">scrabble</button>\n            </div>";
+      wordElement.innerHTML += "<div class=\"word-bonus\">\n                <div class=\"bonus__container\">\n                     <input id=".concat(word.id, "x2 name=").concat(word.id, " data-word-bonus=\"x2\" data-word-id=").concat(word.id, " type=\"checkbox\">\n                     <label for=").concat(word.id, "x2 class=\"bonus__button bonus__button--x2word\">x2</label>\n                </div>\n                <div class=\"bonus__container\">\n                     <input id=").concat(word.id, "x3 name=").concat(word.id, " data-word-bonus=\"x3\" data-word-id=").concat(word.id, " type=\"checkbox\">\n                     <label for=").concat(word.id, "x3 class=\"bonus__button bonus__button--x3word\">x3</label>\n                </div>\n                <div class=\"bonus__container\">\n                      <input id=").concat(word.id, "+50 name=").concat(word.id, " data-word-bonus=\"+50\" data-word-id=").concat(word.id, " type=\"checkbox\">\n                      <label for=").concat(word.id, "+50 class=\"bonus__button bonus__button--scrabble\">scrabble</label>\n                </div>\n                <div class=\"word-sum\" data-word-id=\"").concat(word.id, "\"></div>\n            </div>");
+      word.getSum();
+      var bonusLetterBtns = document.querySelectorAll('[data-letter-bonus]');
+      var bonusWordBtns = document.querySelectorAll('[data-word-id] ~ input');
+      bonusLetterBtns.forEach(function (btn) {
+        btn.addEventListener('change', function (event) {
+          var letterId = event.target.getAttribute('data-letter-id');
+          var bonus = event.target.getAttribute('data-letter-bonus');
+          var thisLetter = word.letters.find(function (letter) {
+            return letter.id === letterId;
+          });
+          thisLetter.updatePoints(bonus, btn.checked);
+          word.getSum();
+          document.querySelector('.word-sum[data-word-id]').textContent = word.getSum();
+        });
+      });
+      bonusWordBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {});
+      });
       console.log(word.getSum());
     }
   }, {

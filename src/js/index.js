@@ -9,13 +9,13 @@ import Player from "./Player";
 
 window.addEventListener('load',
     () => {
-        const board = new GameBoard();
-        const addWordForm = document.querySelector('#addWord');
-        const addPlayerForm = document.querySelector('#addPlayer');
-        const startGameBtn = document.querySelector('#startGame');
-        const savePlayers = document.querySelector('#savePlayers');
-        const passButton = document.querySelector('#pass');
-        const sumButton = document.querySelector('#addSum');
+        const board = new GameBoard(),
+            addWordForm = document.querySelector('#addWord'),
+            addPlayerForm = document.querySelector('#addPlayer'),
+            startGameBtn = document.querySelector('#startGame'),
+            savePlayers = document.querySelector('#savePlayers'),
+            passButton = document.querySelector('#pass'),
+            sumButton = document.querySelector('#addSum');
 
         passButton.addEventListener('click', () => board.switchTurn());
 
@@ -74,7 +74,6 @@ class GameBoard {
         this.players = players;
         this.activePlayer = activePlayer;
         this.words = words;
-        this.gameStatus = false;
         this.points = 0;
     }
 
@@ -92,8 +91,9 @@ class GameBoard {
 
     clearBoard(){
         this.players = [];
-        // wyczysc tablice slow
-        // usun slowa z planszy
+        this.words = [];
+        this.points = 0;
+        this.activePlayer = undefined;
     }
 
     addWord(value){
@@ -108,8 +108,14 @@ class GameBoard {
             const template = `
                     <span class="letter">${letter.char}<span class="letter__score">${letter.points}</span></span>
                     <div class="bonus">
-                        <button class="bonus__button bonus__button--x2">x2</button>
-                        <button class="bonus__button bonus__button--x3">x3</button>
+                        <div class="bonus__container">
+                            <input id=${letter.id}x2 name=${letter.id} data-letter-bonus="x2" data-letter-id=${letter.id} type="checkbox">
+                            <label for=${letter.id}x2 class="bonus__button bonus__button--x2">x2</label>
+                        </div>
+                        <div class="bonus__container">
+                            <input id=${letter.id}x3 name=${letter.id} data-letter-bonus="x3" data-letter-id=${letter.id} type="checkbox">
+                            <label for=${letter.id}x3 class="bonus__button bonus__button--x3">x3</label>
+                        </div>
                     </div>
             `;
             const letterGroup = document.createElement('div');
@@ -118,10 +124,44 @@ class GameBoard {
             wordElement.insertAdjacentElement('beforeend',letterGroup);
         });
         wordElement.innerHTML += `<div class="word-bonus">
-                <button class="bonus__button bonus__button--x2word">x3</button>
-                <button class="bonus__button bonus__button--x3word">x4</button>
-                <button class="bonus__button bonus__button--scrabble">scrabble</button>
+                <div class="bonus__container">
+                     <input id=${word.id}x2 name=${word.id} data-word-bonus="x2" data-word-id=${word.id} type="checkbox">
+                     <label for=${word.id}x2 class="bonus__button bonus__button--x2word">x2</label>
+                </div>
+                <div class="bonus__container">
+                     <input id=${word.id}x3 name=${word.id} data-word-bonus="x3" data-word-id=${word.id} type="checkbox">
+                     <label for=${word.id}x3 class="bonus__button bonus__button--x3word">x3</label>
+                </div>
+                <div class="bonus__container">
+                      <input id=${word.id}+50 name=${word.id} data-word-bonus="+50" data-word-id=${word.id} type="checkbox">
+                      <label for=${word.id}+50 class="bonus__button bonus__button--scrabble">scrabble</label>
+                </div>
+                <div class="word-sum" data-word-id="${word.id}"></div>
             </div>`;
+
+        word.getSum();
+
+        const bonusLetterBtns = document.querySelectorAll('[data-letter-bonus]');
+        const bonusWordBtns = document.querySelectorAll('[data-word-id] ~ input');
+
+        bonusLetterBtns.forEach((btn) => {
+            btn.addEventListener('change', (event) => {
+                const letterId = event.target.getAttribute('data-letter-id');
+                const bonus = event.target.getAttribute('data-letter-bonus');
+                const thisLetter = word.letters.find(letter => letter.id === letterId);
+
+                thisLetter.updatePoints(bonus,btn.checked);
+                word.getSum();
+                document.querySelector('.word-sum[data-word-id]').textContent = word.getSum();
+            });
+        });
+
+        bonusWordBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+
+            });
+        });
+
         console.log(word.getSum());
     }
 

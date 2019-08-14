@@ -78,43 +78,77 @@
 }
 
 .word-bonus {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
   margin-left: 2rem;
+  > div {
+    margin-bottom: .4rem;
+  }
+}
+
+.word-sum {
+  color: $white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem;
 }
 
 .bonus {
-  display: inline-block;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  &__container {
+    position: relative;
+    input {
+      left: 0;
+      position: absolute;
+      top: 0;
+      visibility: hidden;
+    }
+  }
   &__button {
     border: 1px solid $white;
     border-radius: 5px;
     color: $dark-green;
     cursor: pointer;
     font-size: 1.3rem;
+    margin-left: .7rem;
     outline: none;
     padding: .5rem;
     transition: transform .5s;
     &--x2 {
       background-color: $light-blue;
+      opacity: .6;
     }
     &--x3 {
       background-color: $orange;
+      opacity: .6;
     }
     &--x3word {
       color: $white;
       background-color: $red;
+      opacity: .6;
     }
     &--x2word {
       color: $white;
       background-color: $dark-blue;
+      opacity: .6;
     }
     &--scrabble {
       color: $white;
       background-color: $dark-green;
+      opacity: .6;
       text-transform: uppercase;
     }
     &:hover {
       transform: rotate(20deg);
     }
   }
+}
+
+input:checked + label[class*=bonus__button--] {
+  opacity: 1;
 }
 
 .scores {

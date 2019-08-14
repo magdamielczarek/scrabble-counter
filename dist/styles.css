@@ -187,35 +187,64 @@ html {
         margin-left: 1rem; }
 
 .word-bonus {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
   margin-left: 2rem; }
+  .word-bonus > div {
+    margin-bottom: .4rem; }
+
+.word-sum {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem; }
 
 .bonus {
-  display: inline-block; }
+  align-items: center;
+  display: flex;
+  justify-content: center; }
+  .bonus__container {
+    position: relative; }
+    .bonus__container input {
+      left: 0;
+      position: absolute;
+      top: 0;
+      visibility: hidden; }
   .bonus__button {
     border: 1px solid #fff;
     border-radius: 5px;
     color: #005A35;
     cursor: pointer;
     font-size: 1.3rem;
+    margin-left: .7rem;
     outline: none;
     padding: .5rem;
     transition: transform .5s; }
     .bonus__button--x2 {
-      background-color: #9DC9EC; }
+      background-color: #9DC9EC;
+      opacity: .6; }
     .bonus__button--x3 {
-      background-color: #E4B96F; }
+      background-color: #E4B96F;
+      opacity: .6; }
     .bonus__button--x3word {
       color: #fff;
-      background-color: #D60230; }
+      background-color: #D60230;
+      opacity: .6; }
     .bonus__button--x2word {
       color: #fff;
-      background-color: #0691D2; }
+      background-color: #0691D2;
+      opacity: .6; }
     .bonus__button--scrabble {
       color: #fff;
       background-color: #005A35;
+      opacity: .6;
       text-transform: uppercase; }
     .bonus__button:hover {
       transform: rotate(20deg); }
+
+input:checked + label[class*=bonus__button--] {
+  opacity: 1; }
 
 .scores {
   background-color: #E2DAC0;
