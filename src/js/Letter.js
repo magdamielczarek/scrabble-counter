@@ -95,19 +95,17 @@ const punctation = [
     }];
 
 export default class Letter {
-    constructor(char,points,bonus = 0, bonus2 = false, bonus3 = false){
-        this.id = Math.random().toString(36).substr(2, 16);
+    constructor(char,points,bonus2 = false, bonus3 = false){
+        this.id = 'id' + Math.random().toString(36).substr(2, 16);
         this.char = char;
+        this.pointBase = punctation.filter((punct) => {
+            return punct.char === this.char;
+        })[0].value;
         this.points = punctation.filter((punct) => {
             return punct.char === this.char;
         })[0].value;
-        this.bonus = bonus;
         this.bonus2 = bonus2;
         this.bonus3 = bonus3;
-    }
-
-    setBonus(bonus){
-        this.bonus = bonus;
     }
 
     setBonus2(bonus2value){
@@ -120,27 +118,24 @@ export default class Letter {
 
     updatePoints(bonus,state){
         if(bonus === 'x2'){
-            this.bonus2 = state;
-            this.bonus3 = false;
+            this.setBonus2(state);
+            if(state){
+                this.setBonus3(false);
+            }
         } else if(bonus === 'x3'){
-            this.bonus2 = false;
-            this.bonus3 = state;
+            this.setBonus3(state);
+            if(state){
+                this.setBonus2(false);
+            }
         }
 
         if(this.bonus2){
-            this.points *= 2;
+            this.points = this.pointBase * 2;
         } else if(this.bonus3){
-            this.points *= 3;
+            this.points = this.pointBase * 3;
         } else if(!this.bonus2 && !this.bonus3){
-            this.points = punctation.filter((punct) => {
-                return punct.char === this.char;
-            })[0].value;
+            this.points = this.pointBase;
         }
-        console.log(this.points);
-    }
-
-    getBonus(bonus){
-        return this.bonus;
     }
 }
 

@@ -2,7 +2,7 @@ import Letter from "./Letter";
 
 export default class Word {
     constructor(value,letters = [],bonuses = [], bonus2 = false, bonus3 = false, bonusScrabble = false, sum = 0){
-        this.id = Math.random().toString(36).substr(2, 16);
+        this.id = 'id' + Math.random().toString(36).substr(2, 16);
         this.value = value;
         this.letters = [...value].map((letter) => {
             return new Letter(letter)
@@ -17,10 +17,19 @@ export default class Word {
         return this.letters;
     }
 
-    getSum() {
-        return this.letters.reduce((acc,curr) => {
+    setSum() {
+        this.sum = this.letters.reduce((acc,curr) => {
             return acc + curr.points;
         },0);
+    }
+
+    getSum(){
+        return this.sum;
+    }
+
+    //@context = html element;
+    displaySum(context){
+        context.textContent = this.getSum();
     }
 
 }

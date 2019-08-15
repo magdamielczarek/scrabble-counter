@@ -1,6 +1,6 @@
 import '../scss/styles.scss';
 import './Word';
-import './GameBoard';
+// import './GameBoard';
 import './Letter';
 import './Player';
 
@@ -136,10 +136,13 @@ class GameBoard {
                       <input id=${word.id}+50 name=${word.id} data-word-bonus="+50" data-word-id=${word.id} type="checkbox">
                       <label for=${word.id}+50 class="bonus__button bonus__button--scrabble">scrabble</label>
                 </div>
-                <div class="word-sum" data-word-id="${word.id}"></div>
+                <div class="word-sum" data-word-id=${word.id}></div>
             </div>`;
 
-        word.getSum();
+        word.setSum();
+        word.displaySum(document.querySelector('.word-sum[data-word-id='+word.id+']'));
+        this.getSum();
+        this.displaySum(document.querySelector('.board__summary__score > span'));
 
         const bonusLetterBtns = document.querySelectorAll('[data-letter-bonus]');
         const bonusWordBtns = document.querySelectorAll('[data-word-id] ~ input');
@@ -148,11 +151,15 @@ class GameBoard {
             btn.addEventListener('change', (event) => {
                 const letterId = event.target.getAttribute('data-letter-id');
                 const bonus = event.target.getAttribute('data-letter-bonus');
-                const thisLetter = word.letters.find(letter => letter.id === letterId);
+                const thisLetter = word.letters.find(letter => {
+                    return letter.id === letterId;
+                });
 
-                thisLetter.updatePoints(bonus,btn.checked);
-                word.getSum();
-                document.querySelector('.word-sum[data-word-id]').textContent = word.getSum();
+                thisLetter.updatePoints(bonus,event.target.checked);
+                word.setSum();
+                word.displaySum(document.querySelector('.word-sum[data-word-id='+word.id+']'));
+                this.getSum();
+                this.displaySum(document.querySelector('.board__summary__score > span'));
             });
         });
 
@@ -161,8 +168,6 @@ class GameBoard {
 
             });
         });
-
-        console.log(word.getSum());
     }
 
     removeWord(id){
@@ -185,5 +190,15 @@ class GameBoard {
 
     pass(){
         this.switchTurn();
+    }
+
+    getSum(){
+        return this.words.reduce((acc,curr) => {
+            return acc + curr.getSum();
+        },0);
+    }
+
+    displaySum(context){
+        context.textContent = this.getSum();
     }
 }
