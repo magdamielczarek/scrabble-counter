@@ -47,6 +47,7 @@ export default class GameBoard {
         for(let i = 0; i < this.getPlayers().length; i++){
             document.querySelector('tfoot tr').insertAdjacentHTML('beforeend','<td>0</td>');
         }
+        document.querySelector('#endGame').classList.toggle('endGame');
     }
 
     addWord(value){
@@ -214,5 +215,21 @@ export default class GameBoard {
     displayPlayerSummary(){
         const sum = this.players[this.activePlayer].getSum();
         document.querySelector('.scores tfoot tr td:nth-of-type(' + Number(this.activePlayer + 1) +')').textContent = sum;
+    }
+
+    validateWord(word){
+
+    }
+
+    endGame(){
+        const scores = [];
+        this.getPlayers().forEach((player) => {
+            scores.push(player.getSum());
+        });
+        const result = Math.max(...scores);
+        const indices = scores.reduce((acc, curr, i) => (curr === result) ? acc.concat(i) : acc, []);
+        indices.forEach((i) => {
+        document.querySelector('.board__word').innerHTML = `<p class="result-info">🏆🏆🏆 <br/> wygrywa <strong>${this.getPlayers()[i].name}</strong><br/>${result} punktów</p>`;
+        });
     }
 }

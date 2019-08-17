@@ -14,7 +14,8 @@ window.addEventListener('load',
             startGameBtn = document.querySelector('#startGame'),
             savePlayers = document.querySelector('#savePlayers'),
             passButton = document.querySelector('#pass'),
-            sumButton = document.querySelector('#addSum');
+            sumButton = document.querySelector('#addSum'),
+            endGameButton = document.querySelector('#endGame');
 
         passButton.addEventListener('click', () => {
             board.addPlayerScore();
@@ -75,5 +76,6 @@ window.addEventListener('load',
             board.clearBoard();
         });
 
+        endGameButton.addEventListener('click', board.endGame.bind(board));
 
     }, false);
