@@ -142,6 +142,7 @@
       text-transform: uppercase;
     }
     &:hover {
+      opacity: 1;
       transform: rotate(20deg);
     }
   }
