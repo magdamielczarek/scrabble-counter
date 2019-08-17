@@ -58,6 +58,7 @@ export default class GameBoard {
     displayWord(wordContext,word){
         const wordElement = document.createElement('div');
         wordElement.classList.add('letters-container');
+        wordElement.setAttribute('id', word.id+'container');
         wordElement.innerHTML = ``;
         wordContext.insertAdjacentElement('beforeend',wordElement);
 
@@ -85,6 +86,7 @@ export default class GameBoard {
 
         // add bonuses for each letter and for whole word
         wordElement.innerHTML += `<div class="word-bonus">
+                <button class="delete-word-btn"><img src="../assets/svg/delete.svg"/></button>
                 <div class="bonus__container">
                      <input id=${word.id}x2 data-word-bonus="x2" data-word-id=${word.id} type="checkbox">
                      <label for=${word.id}x2 class="bonus__button bonus__button--x2word">x2</label>
@@ -139,10 +141,23 @@ export default class GameBoard {
 
             });
         });
+
+        document.querySelector('#' + word.id +'container .delete-word-btn').addEventListener('click', () => {
+            this.removeWord(word.id);
+            this.getSum();
+            this.displaySum(document.querySelector('.board__summary__score > span'));
+        });
     }
 
     removeWord(id){
-        document.querySelector('#addSum').setAttribute('disabled',true);
+        const index = this.words.findIndex(word => word.id === id );
+        const removed = document.getElementById(id +'container');
+        console.log(removed);
+        this.words.splice(index,1);
+        document.querySelector('.board__word').removeChild(removed);
+        if(!this.words.length){
+            document.querySelector('#addSum').setAttribute('disabled',true);
+        }
     }
 
     switchTurn(){
