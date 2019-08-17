@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -36,18 +36,18 @@
         <main class="board">
             <section class="board__panel">
                 <strong class="player-name"></strong>
-                <button id="pass" class="button" type="button">PASS / WYMIEŃ LITERY</button>
+                <button id="pass" class="button" type="button" disabled>PASS / WYMIEŃ LITERY</button>
                 <form id="addWord" autocomplete="off">
                     <div class="form-group">
-                        <input id="word" type="text" placeholder="wpisz słowo" name="word"/>
-                        <button class="button button--strong" type="submit">dodaj</button>
+                        <input id="word" type="text" placeholder="wpisz słowo" name="word" disabled />
+                        <button class="button button--strong" type="submit" disabled>dodaj</button>
                     </div>
                 </form>
             </section>
             <section class="board__word"></section>
             <section class="board__summary">
                 <div class="board__summary__score">punkty: <span>0</span></div>
-                <button id="addSum" class="button button--strong" type="button">sumuj</button>
+                <button id="addSum" class="button button--strong" type="button" disabled>sumuj</button>
             </section>
         </main>
         <aside class="scores">

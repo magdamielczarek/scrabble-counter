@@ -121,11 +121,13 @@ export default class Letter {
             this.setBonus2(state);
             if(state){
                 this.setBonus3(false);
+                document.querySelector('input[id='+this.id+'x3]').checked = false;
             }
         } else if(bonus === 'x3'){
             this.setBonus3(state);
             if(state){
                 this.setBonus2(false);
+                document.querySelector('input[id='+this.id+'x2]').checked = false;
             }
         }
 

@@ -183,10 +183,26 @@ input:checked + label[class*=bonus__button--] {
     }
     tbody td {
       background-color: $white;
+      height: 1.4rem;
+      padding: .2rem;
     }
     tfoot {
-      background-color: #005A35;
+      background-color: $dark-blue;
       color: $white;
+      td {
+        padding: .5rem;
+      }
     }
   }
+}
+
+button:disabled {
+  &:hover {
+    cursor: not-allowed;
+    transform: scale(1);
+  }
+}
+
+input:disabled {
+  opacity: .5;
 }

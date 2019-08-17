@@ -37,6 +37,12 @@ export default class GameBoard {
     initializeGame(){
         this.activePlayer = this.players[0].id;
         document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
+        document.querySelectorAll('button:not(#addSum)').forEach((button) => {
+            button.removeAttribute('disabled');
+        });
+        document.querySelectorAll('input').forEach((button) => {
+            button.removeAttribute('disabled');
+        });
         this._addScoresRow();
         for(let i = 0; i < this.getPlayers().length; i++){
             document.querySelector('tfoot tr').insertAdjacentHTML('beforeend','<td>0</td>');
@@ -59,7 +65,7 @@ export default class GameBoard {
         word.getLetters().map((letter) => {
             const template = `
                     <span class="letter">${letter.char}<span class="letter__score">${letter.points}</span></span>
-                    <div class="bonus">
+                    <form id=${letter.id} class="bonus">
                         <div class="bonus__container">
                             <input id=${letter.id}x2 name=${letter.id} data-letter-bonus="x2" data-letter-id=${letter.id} type="checkbox">
                             <label for=${letter.id}x2 class="bonus__button bonus__button--x2">x2</label>
@@ -68,12 +74,13 @@ export default class GameBoard {
                             <input id=${letter.id}x3 name=${letter.id} data-letter-bonus="x3" data-letter-id=${letter.id} type="checkbox">
                             <label for=${letter.id}x3 class="bonus__button bonus__button--x3">x3</label>
                         </div>
-                    </div>
+                    </form>
             `;
             const letterGroup = document.createElement('div');
             letterGroup.classList.add('letter-group');
             letterGroup.innerHTML = template;
             wordElement.insertAdjacentElement('beforeend',letterGroup);
+            document.querySelector('#addSum').removeAttribute('disabled');
         });
 
         // add bonuses for each letter and for whole word
@@ -135,7 +142,7 @@ export default class GameBoard {
     }
 
     removeWord(id){
-
+        document.querySelector('#addSum').setAttribute('disabled',true);
     }
 
     switchTurn(){
@@ -166,6 +173,9 @@ export default class GameBoard {
         this.players = [];
         this.activePlayer = 0;
         document.querySelector('.player-name').textContent = '';
+        document.querySelectorAll('main button, #word').forEach((btn) => {
+            btn.setAttribute('disabled',true);
+        });
     }
 
     getSum(){
@@ -183,6 +193,7 @@ export default class GameBoard {
     addPlayerScore(score = this.currentSum){
         this.players[this.activePlayer].addScore(score);
         document.querySelector('.scores tbody tr:last-of-type td:nth-of-type(' + Number(this.activePlayer + 1) +')').textContent = score;
+        document.querySelector('#addSum').setAttribute('disabled',true);
     }
 
     displayPlayerSummary(){

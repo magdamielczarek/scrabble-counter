@@ -75,4 +75,5 @@ window.addEventListener('load',
             board.clearBoard();
         });
 
+
     }, false);
