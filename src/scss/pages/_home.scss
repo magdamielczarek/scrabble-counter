@@ -156,7 +156,7 @@ input:checked + label[class*=bonus__button--] {
   border-left: 2px solid $white;
   font-size: 1.2rem;
   grid-area: scores;
-  overflow: hidden;
+  overflow-y: auto;
   padding: 1rem;
   .add-players {
     display: none;
@@ -177,7 +177,12 @@ input:checked + label[class*=bonus__button--] {
       padding: .7rem;
     }
     th,td {
+      border: 1px solid $dark-green;
+      line-height: 1.2rem;
       text-align: center;
+    }
+    tbody td {
+      background-color: $white;
     }
     tfoot {
       background-color: #005A35;
