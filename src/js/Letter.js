@@ -21,6 +21,9 @@ const punctation = [
         char: "e",
         value: 1
     },{
+        char: "ę",
+        value: 5
+    },{
         char: "f",
         value: 5
     },{
