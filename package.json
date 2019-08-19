@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://magdamielczarek.github.io/scrabble-counter",
   "scripts": {
     "dev": "webpack --env.mode development",
     "prod": "webpack --env.mode production",
     "live": "webpack-dev-server --env.mode development --content-base=src",
-    "deploy": "gh-pages -d build"
+    "deploy" : "gh-pages -d dist"
   },
   "author": "Magda Mielczarek",
   "license": "ISC",
