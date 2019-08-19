@@ -87,7 +87,7 @@ export default class GameBoard {
 
         // add bonuses for each letter and for whole word
         wordElement.innerHTML += `<div class="word-bonus">
-                <button class="delete-word-btn"><img src="../assets/svg/delete.svg"/></button>
+                <button class="delete-word-btn"><img src="../../dist/assets/delete.svg"/></button>
                 <div class="bonus__container">
                      <input id=${word.id}x2 data-word-bonus="x2" data-word-id=${word.id} type="checkbox">
                      <label for=${word.id}x2 class="bonus__button bonus__button--x2word">x2</label>
