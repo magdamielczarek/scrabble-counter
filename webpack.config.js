@@ -10,7 +10,8 @@ module.exports = ({mode}) => {
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: 'bundle.js',
-      publicPath: '../../'
+      publicPath: "/scrabble-counter/"
+      // publicPath: '../../'
     },
     mode,
     watch: true,

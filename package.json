@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --env.mode development",
     "prod": "webpack --env.mode production",
-    "live": "webpack-dev-server --env.mode development --content-base=src"
+    "live": "webpack-dev-server --env.mode development --content-base=src",
+    "deploy": "gh-pages -d build"
   },
   "author": "Magda Mielczarek",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "eslint-plugin-import": "^2.18.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^4.1.0",
+    "gh-pages": "^2.1.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^5.0.0",
