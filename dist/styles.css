@@ -111,7 +111,6 @@ html {
       transition: transform .5s;
       width: 2rem; }
       .footer__icons__icon:hover {
-        background-color: #005A35;
         transform: scale(1.2); }
       .footer__icons__icon a {
         cursor: pointer;
@@ -241,6 +240,7 @@ html {
       opacity: .6;
       text-transform: uppercase; }
     .bonus__button:hover {
+      opacity: 1;
       transform: rotate(20deg); }
 
 input:checked + label[class*=bonus__button--] {
@@ -251,8 +251,9 @@ input:checked + label[class*=bonus__button--] {
   border-left: 2px solid #fff;
   font-size: 1.2rem;
   grid-area: scores;
-  overflow: hidden;
-  padding: 1rem; }
+  overflow-y: auto;
+  padding: 1rem;
+  text-align: center; }
   .scores .add-players {
     display: none;
     margin-bottom: 2rem;
@@ -263,16 +264,55 @@ input:checked + label[class*=bonus__button--] {
       transform: rotateY(0); }
   .scores .players {
     font-size: 1.3rem;
+    margin-bottom: 1.5rem;
     width: 100%; }
     .scores .players th {
       background-color: #005A35;
       color: #fff;
       padding: .7rem; }
     .scores .players th, .scores .players td {
+      border: 1px solid #005A35;
+      line-height: 1.2rem;
       text-align: center; }
+    .scores .players tbody td {
+      background-color: #fff;
+      height: 1.4rem;
+      padding: .2rem; }
     .scores .players tfoot {
-      background-color: #005A35;
+      background-color: #0691D2;
       color: #fff; }
+      .scores .players tfoot td {
+        padding: .5rem; }
+
+button:disabled:hover {
+  transform: scale(1); }
+
+input:disabled {
+  opacity: .5; }
+
+.delete-word-btn {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #323232;
+  cursor: pointer;
+  height: 3rem;
+  margin-left: .7rem;
+  outline: none;
+  padding: .5rem;
+  transition: transform .5s;
+  width: 3rem; }
+  .delete-word-btn:hover {
+    transform: scale(1.1); }
+  .delete-word-btn img {
+    width: 100%; }
+
+.endGame {
+  visibility: hidden; }
+
+.result-info {
+  color: #fff;
+  font-size: 3rem;
+  text-align: center; }
 
 
 /*# sourceMappingURL=styles.css.map*/

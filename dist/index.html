@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Scrabble counter</title>
-</head>
+<link href="../../styles.css" rel="stylesheet"></head>
 <body>
     <div class="wrapper">
         <hader class="header">
@@ -36,23 +36,30 @@
         <main class="board">
             <section class="board__panel">
                 <strong class="player-name"></strong>
-                <button id="pass" class="button" type="button">PASS / WYMIEŃ LITERY</button>
-                <form id="addWord">
+                <button id="pass" class="button" type="button" disabled>PASS / WYMIEŃ LITERY</button>
+                <form id="addWord" autocomplete="off">
                     <div class="form-group">
-                        <input id="word" type="text" placeholder="wpisz słowo" name="word"/>
-                        <button class="button button--strong" type="submit">dodaj</button>
+                        <input id="word"
+                               type="text"
+                               placeholder="wpisz słowo"
+                               name="word"
+                               oninvalid="this.setCustomValidity('wyłącznie litery, bez znaków specjalnych')"
+                               onkeyup="this.setCustomValidity('')"
+                               disabled required pattern="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,20}"/>
+                        <button class="button button--strong" type="submit" disabled>dodaj</button>
                     </div>
                 </form>
             </section>
             <section class="board__word"></section>
             <section class="board__summary">
                 <div class="board__summary__score">punkty: <span>0</span></div>
-                <button id="addSum" class="button button--strong" type="button">sumuj</button>
+                <button id="addSum" class="button button--strong" type="button" disabled>sumuj</button>
             </section>
         </main>
         <aside class="scores">
             <form id="addPlayer" class="add-players">
                 <div class="form-group">
+<!--                    <label>Imię gracza</label>-->
                     <input id="player" type="text" name="player" placeholder="imię gracza"/>
                     <button class="button" type="submit">dodaj</button>
                     <button id="savePlayers" class="button button--strong" type="button" disabled>graj</button>
@@ -67,15 +74,18 @@
                     <tr></tr>
                 </tfoot>
             </table>
+            <button id="endGame" class="button button--strong endGame">Zakończ</button>
         </aside>
         <footer class="footer">
             <span class="footer__copyright">&copy; Magda Mielczarek 2019</span>
             <div class="footer__icons">
                 <div class="footer__icons__icon">
-                    <a href="https://www.linkedin.com/in/magda-mielczarek-20b06275/" target="_blank"><img src="../../assets/linkedin-logo.svg" /></a>
+                    <a href="https://www.linkedin.com/in/magda-mielczarek-20b06275/" target="_blank">
+                        <img src="../../assets/linkedin-logo.svg" alt="linkedin link"/>
+                    </a>
                 </div>
                 <div class="footer__icons__icon">
-                    <a href="https://github.com/magdamielczarek" target="_blank"><img src="../../assets/github-sign.svg" /></a>
+                    <a href="https://github.com/magdamielczarek" target="_blank"><img src="../../assets/github-sign.svg" alt="github link"/></a>
                 </div>
             </div>
         </footer>
