@@ -8,7 +8,7 @@
     "dev": "webpack --env.mode development",
     "prod": "webpack --env.mode production",
     "live": "webpack-dev-server --env.mode development --content-base=src",
-    "deploy" : "gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "author": "Magda Mielczarek",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.5.5",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
