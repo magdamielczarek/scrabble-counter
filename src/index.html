@@ -39,7 +39,13 @@
                 <button id="pass" class="button" type="button" disabled>PASS / WYMIEŃ LITERY</button>
                 <form id="addWord" autocomplete="off">
                     <div class="form-group">
-                        <input id="word" type="text" placeholder="wpisz słowo" name="word" disabled />
+                        <input id="word"
+                               type="text"
+                               placeholder="wpisz słowo"
+                               name="word"
+                               oninvalid="this.setCustomValidity('wyłącznie litery, bez znaków specjalnych')"
+                               onkeyup="this.setCustomValidity('')"
+                               disabled required pattern="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,20}"/>
                         <button class="button button--strong" type="submit" disabled>dodaj</button>
                     </div>
                 </form>
@@ -53,6 +59,7 @@
         <aside class="scores">
             <form id="addPlayer" class="add-players">
                 <div class="form-group">
+<!--                    <label>Imię gracza</label>-->
                     <input id="player" type="text" name="player" placeholder="imię gracza"/>
                     <button class="button" type="submit">dodaj</button>
                     <button id="savePlayers" class="button button--strong" type="button" disabled>graj</button>
@@ -73,10 +80,12 @@
             <span class="footer__copyright">&copy; Magda Mielczarek 2019</span>
             <div class="footer__icons">
                 <div class="footer__icons__icon">
-                    <a href="https://www.linkedin.com/in/magda-mielczarek-20b06275/" target="_blank"><img src="assets/svg/linkedin-logo.svg" /></a>
+                    <a href="https://www.linkedin.com/in/magda-mielczarek-20b06275/" target="_blank">
+                        <img src="assets/svg/linkedin-logo.svg" alt="linkedin link"/>
+                    </a>
                 </div>
                 <div class="footer__icons__icon">
-                    <a href="https://github.com/magdamielczarek" target="_blank"><img src="assets/svg/github-sign.svg" /></a>
+                    <a href="https://github.com/magdamielczarek" target="_blank"><img src="assets/svg/github-sign.svg" alt="github link"/></a>
                 </div>
             </div>
         </footer>

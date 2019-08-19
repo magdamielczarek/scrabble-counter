@@ -24,10 +24,10 @@ window.addEventListener('load',
 
         addWordForm.addEventListener('submit',function(event){
             event.preventDefault();
-            if(this.elements.word.value === ''){
+            const text = this.elements.word.value.trim().toLowerCase();
+            if(!/^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{1,20}$/.test(text)){
                 return;
             } else {
-                const text = this.elements.word.value.toLowerCase();
                 board.displayWord(document.querySelector('.board__word'),board.addWord(text));
                 this.reset();
             }
@@ -77,5 +77,6 @@ window.addEventListener('load',
         });
 
         endGameButton.addEventListener('click', board.endGame.bind(board));
+
 
     }, false);

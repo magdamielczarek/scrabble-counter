@@ -43,7 +43,7 @@ export default class GameBoard {
         document.querySelectorAll('input').forEach((button) => {
             button.removeAttribute('disabled');
         });
-        this._addScoresRow();
+        this.addScoresRow();
         for(let i = 0; i < this.getPlayers().length; i++){
             document.querySelector('tfoot tr').insertAdjacentHTML('beforeend','<td>0</td>');
         }
@@ -165,12 +165,12 @@ export default class GameBoard {
         this.activePlayer = this.activePlayer + 1;
         if(this.activePlayer === this.getPlayers().length){
             this.activePlayer = 0;
-            this._addScoresRow();
+            this.addScoresRow();
         }
         document.querySelector('.player-name').innerText = this.players[this.activePlayer].name;
     }
 
-    _addScoresRow(){
+    addScoresRow(){
         const newRow = document.createElement('tr');
         for(let i = 0; i < this.getPlayers().length; i++){
             newRow.insertAdjacentHTML('beforeend','<td></td>');
@@ -217,10 +217,6 @@ export default class GameBoard {
         document.querySelector('.scores tfoot tr td:nth-of-type(' + Number(this.activePlayer + 1) +')').textContent = sum;
     }
 
-    validateWord(word){
-
-    }
-
     endGame(){
         const scores = [];
         this.getPlayers().forEach((player) => {
@@ -231,5 +227,6 @@ export default class GameBoard {
         indices.forEach((i) => {
         document.querySelector('.board__word').innerHTML = `<p class="result-info">🏆🏆🏆 <br/> wygrywa <strong>${this.getPlayers()[i].name}</strong><br/>${result} punktów</p>`;
         });
+        document.getElementById('endGame').classList.add('endGame');
     }
 }
