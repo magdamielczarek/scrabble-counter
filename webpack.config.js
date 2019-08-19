@@ -4,7 +4,6 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = ({mode}) => {
-  console.log(mode);
   return {
     entry: './src/js/index.js',
     output: {
