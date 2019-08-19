@@ -192,6 +192,7 @@ export default class GameBoard {
         document.querySelectorAll('main button, #word').forEach((btn) => {
             btn.setAttribute('disabled',true);
         });
+        document.getElementById('endGame').classList.add('endGame');
     }
 
     getSum(){
