@@ -1,0 +1,33 @@
+@import "../utils/variables";
+
+.footer {
+  align-items: center;
+  background-color: #222;
+  color: $white;
+  display: flex;
+  font-size: 1.5rem;
+  grid-area: footer;
+  justify-content: space-between;
+  padding: 1rem;
+  &__icons {
+    align-items: center;
+    display: flex;
+    &__icon {
+      border-radius: 20%;
+      height: 2rem;
+      margin-left: 1rem;
+      transition: transform .5s;
+      width: 2rem;
+      &:hover {
+        transform: scale(1.2);
+      }
+      a {
+        cursor: pointer;
+        width: 100%;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

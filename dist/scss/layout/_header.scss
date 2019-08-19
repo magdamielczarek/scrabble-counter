@@ -1,0 +1,16 @@
+@import '../utils/variables';
+
+.header {
+  align-items: center;
+  background-image: linear-gradient(45deg, $dark-green, $light-green, $dark-green);
+  border-bottom: 2px solid $white;
+  display: flex;
+  flex-flow: row wrap;
+  grid-area: header;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.word {
+  margin-right: 3rem;
+}
