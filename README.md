@@ -4,5 +4,6 @@ Aplikacja do liczenia punktów podczas gry w Scrabble (polska wersja językowa).
 
 Dalsze plany rozwoju:
 * refaktor kodu
-* poprawa responsywności
+* zapewnienie responsywności
+* poprawa błędu - czyszczenie tablicy w przypadku pasowania
 
